@@ -22,25 +22,28 @@ function readDataAsync() {
 router.get("/", async (req, res, next) => {
   try {
     const data = await readDataAsync();
-    const { q, page = 1, pageSize = 20 } = req.query;
+    let { q, page = 1, pageSize = 20 } = req.query;
+    let pageNum = parseInt(page);
+    let size = parseInt(pageSize);
+    if (!Number.isFinite(pageNum) || pageNum < 1) pageNum = 1;
+    if (!Number.isFinite(size) || size < 1) size = 20;
     let results = data;
 
     if (q) {
       results = results.filter((item) =>
+        typeof item.name === "string" &&
         item.name.toLowerCase().includes(q.toLowerCase())
       );
     }
 
     // Pagination
-    const pageNum = parseInt(page);
-    const size = parseInt(pageSize);
     const start = (pageNum - 1) * size;
     const end = start + size;
     const paginated = results.slice(start, end);
 
     res.json({
-      items: paginated,
-      total: results.length,
+      items: Array.isArray(paginated) ? paginated : [],
+      total: Number.isFinite(results.length) ? results.length : 0,
       page: pageNum,
       pageSize: size,
     });

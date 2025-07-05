@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useState } from "react";
 
-const DataContext = createContext();
+// Export DataContext for testing
+export const DataContext = createContext();
 
 export function DataProvider({ children }) {
   const [items, setItems] = useState([]);

@@ -36,15 +36,15 @@ describe("Items API", () => {
     const app = setupApp();
     const res = await request(app).get("/api/items");
     expect(res.status).toBe(200);
-    expect(res.body.length).toBe(3);
-    expect(res.body[0].name).toBe("Laptop Pro");
+    expect(res.body.items.length).toBe(3);
+    expect(res.body.items[0].name).toBe("Laptop Pro");
   });
 
   it("GET /api/items supports search", async () => {
     const app = setupApp();
     const res = await request(app).get("/api/items?q=pro");
     expect(res.status).toBe(200);
-    expect(res.body[0].name).toMatch(/pro/i);
+    expect(res.body.items[0].name).toMatch(/pro/i);
   });
 
   it("GET /api/items/:id returns item", async () => {
