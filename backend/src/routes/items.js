@@ -22,7 +22,7 @@ function readDataAsync() {
 router.get("/", async (req, res, next) => {
   try {
     const data = await readDataAsync();
-    const { limit, q } = req.query;
+    const { q, page = 1, pageSize = 20 } = req.query;
     let results = data;
 
     if (q) {
@@ -31,11 +31,19 @@ router.get("/", async (req, res, next) => {
       );
     }
 
-    if (limit) {
-      results = results.slice(0, parseInt(limit));
-    }
+    // Pagination
+    const pageNum = parseInt(page);
+    const size = parseInt(pageSize);
+    const start = (pageNum - 1) * size;
+    const end = start + size;
+    const paginated = results.slice(start, end);
 
-    res.json(results);
+    res.json({
+      items: paginated,
+      total: results.length,
+      page: pageNum,
+      pageSize: size,
+    });
   } catch (err) {
     next(err);
   }
