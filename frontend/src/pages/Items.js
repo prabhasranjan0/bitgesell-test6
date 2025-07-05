@@ -13,6 +13,7 @@ function Items() {
     fetchItems,
     setPage,
     setPageSize,
+    error, // Destructure error from context
   } = useData();
   const [search, setSearch] = useState("");
 
@@ -67,6 +68,13 @@ function Items() {
 
   const totalPages = Math.ceil(total / pageSize);
 
+  // Show error message if present
+  if (error)
+    return (
+      <p style={{ color: "red", textAlign: "center", marginTop: 32 }}>
+        {error}
+      </p>
+    );
   if (loading) return <p>Loading...</p>;
   if (!items.length) return <p>No items found.</p>;
 

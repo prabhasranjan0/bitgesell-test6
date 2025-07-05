@@ -4,15 +4,49 @@ import { useParams, useNavigate } from "react-router-dom";
 function ItemDetail() {
   const { id } = useParams();
   const [item, setItem] = useState(null);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
+    let active = true;
     fetch("http://localhost:3001/api/items/" + id)
-      .then((res) => (res.ok ? res.json() : Promise.reject(res)))
-      .then(setItem)
-      .catch(() => navigate("/"));
-  }, [id, navigate]);
+      .then((res) => {
+        if (!res.ok) throw new Error("Item not found");
+        return res.json();
+      })
+      .then((data) => {
+        if (active) setItem(data);
+      })
+      .catch((err) => {
+        if (active) setError(err.message);
+      });
+    return () => {
+      active = false;
+    };
+  }, [id]);
 
+  if (error)
+    return (
+      <div style={{ color: "red", textAlign: "center", marginTop: 32 }}>
+        {error} <br />
+        <button
+          onClick={() => navigate(-1)}
+          style={{
+            marginTop: 12,
+            padding: "4px 10px",
+            borderRadius: 4,
+            border: "1px solid #ccc",
+            background: "#f5f5f5",
+            color: "#2d72d9",
+            fontWeight: 500,
+            cursor: "pointer",
+            fontSize: 14,
+          }}
+        >
+          Back
+        </button>
+      </div>
+    );
   if (!item) return <p>Loading...</p>;
 
   return (
