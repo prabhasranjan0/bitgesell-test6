@@ -130,7 +130,10 @@ function Items() {
             <select
               id="pageSize"
               value={pageSize}
-              onChange={(e) => setPageSize(Number(e.target.value))}
+              onChange={(e) => {
+                setPage(1);
+                setPageSize(Number(e.target.value));
+              }}
               style={{
                 padding: 6,
                 borderRadius: 4,

@@ -15,6 +15,8 @@ function App() {
           display: "flex",
           alignItems: "center",
           gap: 16,
+          flexWrap: "wrap",
+          justifyContent: "space-between",
         }}
         aria-label="Main navigation"
       >
@@ -26,10 +28,22 @@ function App() {
             color: "#333",
             textDecoration: "none",
             letterSpacing: 1,
+            padding: "4px 8px",
+            borderRadius: 4,
+            transition: "background 0.2s, color 0.2s",
+          }}
+          onMouseOver={(e) => {
+            e.currentTarget.style.background = "#e3eefd";
+            e.currentTarget.style.color = "#2d72d9";
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.background = "transparent";
+            e.currentTarget.style.color = "#333";
           }}
         >
-          Items
+          Productivity Store
         </Link>
+        {/* Responsive nav placeholder for future links or menu */}
       </nav>
       <main style={{ minHeight: "80vh" }}>
         <Routes>
