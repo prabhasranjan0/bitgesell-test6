@@ -1,0 +1,34 @@
+.loading-spinner__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+  width: 100%;
+}
+
+.loading-spinner__circle {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #e3eefd;
+  border-top: 4px solid #2d72d9;
+  border-radius: 50%;
+  animation: loading-spinner-spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+.loading-spinner__message {
+  color: #2d72d9;
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+@keyframes loading-spinner-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

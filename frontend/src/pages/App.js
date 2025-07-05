@@ -1,46 +1,14 @@
-import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import Items from "./Items";
 import ItemDetail from "./ItemDetail";
 import { DataProvider } from "../state/DataContext";
+import "./app.css";
 
 function App() {
   return (
     <DataProvider>
-      <nav
-        style={{
-          padding: 16,
-          borderBottom: "1px solid #ddd",
-          background: "#f8f9fa",
-          display: "flex",
-          alignItems: "center",
-          gap: 16,
-          flexWrap: "wrap",
-          justifyContent: "space-between",
-        }}
-        aria-label="Main navigation"
-      >
-        <Link
-          to="/"
-          style={{
-            fontWeight: 600,
-            fontSize: 20,
-            color: "#333",
-            textDecoration: "none",
-            letterSpacing: 1,
-            padding: "4px 8px",
-            borderRadius: 4,
-            transition: "background 0.2s, color 0.2s",
-          }}
-          onMouseOver={(e) => {
-            e.currentTarget.style.background = "#e3eefd";
-            e.currentTarget.style.color = "#2d72d9";
-          }}
-          onMouseOut={(e) => {
-            e.currentTarget.style.background = "transparent";
-            e.currentTarget.style.color = "#333";
-          }}
-        >
+      <nav className="main-nav" aria-label="Main navigation">
+        <Link to="/" className="brand-link">
           Productivity Store
         </Link>
         {/* Responsive nav placeholder for future links or menu */}

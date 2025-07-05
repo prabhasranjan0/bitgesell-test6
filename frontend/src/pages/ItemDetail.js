@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import LoadingSpinner from "../sharedComponent/LoadingSpinner/LoadingSpinner";
+import "./itemDetail.css";
 
 function ItemDetail() {
   const { id } = useParams();
@@ -27,103 +29,36 @@ function ItemDetail() {
 
   if (error)
     return (
-      <div style={{ color: "red", textAlign: "center", marginTop: 32 }}>
+      <div className="item-error">
         {error} <br />
-        <button
-          onClick={() => navigate(-1)}
-          style={{
-            marginTop: 12,
-            padding: "4px 10px",
-            borderRadius: 4,
-            border: "1px solid #ccc",
-            background: "#f5f5f5",
-            color: "#2d72d9",
-            fontWeight: 500,
-            cursor: "pointer",
-            fontSize: 14,
-          }}
-        >
+        <button className="item-back-button" onClick={() => navigate(-1)}>
           Back
         </button>
       </div>
     );
-  if (!item) return <p>Loading...</p>;
+
+  if (!item) return <LoadingSpinner message="Loading product details..." />;
 
   return (
-    <div
-      style={{
-        maxWidth: 420,
-        width: "90vw",
-        margin: "32px auto",
-        background: "#fff",
-        borderRadius: 10,
-        boxShadow: "0 4px 24px #0003, 0 1.5px 6px #0001",
-        padding: 24,
-        display: "flex",
-        flexDirection: "column",
-        gap: 16,
-        fontSize: 18,
-        lineHeight: 1.6,
-      }}
-    >
+    <div className="item-container">
       <button
+        className="item-back-button"
         onClick={() => navigate(-1)}
-        style={{
-          alignSelf: "flex-start",
-          marginBottom: 8,
-          padding: "4px 10px",
-          borderRadius: 4,
-          border: "1px solid #ccc",
-          background: "#f5f5f5",
-          color: "#2d72d9",
-          fontWeight: 500,
-          cursor: "pointer",
-          fontSize: 14,
-          boxShadow: "0 1px 4px #0001",
-          transition: "background 0.2s, color 0.2s",
-          outline: "none",
-        }}
-        onMouseOver={(e) => (e.currentTarget.style.background = "#e3eefd")}
-        onMouseOut={(e) => (e.currentTarget.style.background = "#f5f5f5")}
+        onMouseOver={(e) => e.currentTarget.classList.add("hover")}
+        onMouseOut={(e) => e.currentTarget.classList.remove("hover")}
         aria-label="Back to list"
       >
-        <span style={{ fontSize: 16, marginRight: 4 }}>←</span> Back
+        <span className="item-back-arrow">←</span> Back
       </button>
-      <h2 style={{ fontSize: 26, marginBottom: 8, wordBreak: "break-word" }}>
-        {item.name}
-      </h2>
-      <div
-        style={{
-          display: "flex",
-          gap: 16,
-          alignItems: "center",
-          marginBottom: 8,
-        }}
-      >
-        <span
-          style={{
-            display: "inline-block",
-            background: "#e3eefd",
-            color: "#2d72d9",
-            borderRadius: 4,
-            padding: "2px 8px",
-            fontSize: 13,
-            fontWeight: 500,
-          }}
-        >
-          {item.category}
-        </span>
-        <span
-          style={{
-            color: "#27ae60",
-            fontWeight: 600,
-            fontSize: 18,
-          }}
-        >
-          ${item.price}
-        </span>
+
+      <h2 className="item-title">{item.name}</h2>
+
+      <div className="item-meta">
+        <span className="item-category">{item.category}</span>
+        <span className="item-price">${item.price}</span>
       </div>
-      <div style={{ color: "#666", fontSize: 15, marginBottom: 12 }}>
+
+      <div className="item-description">
         <strong>Description:</strong>{" "}
         {item.description || "No description provided."}
       </div>

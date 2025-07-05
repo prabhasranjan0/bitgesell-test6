@@ -1,0 +1,28 @@
+/* Navigation styles */
+.main-nav {
+  padding: 16px;
+  border-bottom: 1px solid #ddd;
+  background: #f8f9fa;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.brand-link {
+  font-weight: 600;
+  font-size: 20px;
+  color: #333;
+  text-decoration: none;
+  letter-spacing: 1px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.brand-link:hover,
+.brand-link:focus {
+  background: #e3eefd;
+  color: #2d72d9;
+}

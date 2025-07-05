@@ -1,0 +1,89 @@
+.items__container {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.items__card {
+  width: 600px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 24px #0002, 0 1.5px 6px #0001;
+  padding: 24px;
+  margin: 32px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.items__title {
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.items__list-wrapper {
+  border: 1px solid #eee;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.items__row {
+  border-bottom: 1px solid #eee;
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  padding: 0 16px;
+  background: #fff;
+}
+.items__row:nth-child(even) {
+  background: #fafbfc;
+}
+
+.items__link {
+  text-decoration: none;
+  color: #2d72d9;
+  font-weight: 500;
+}
+
+.items__controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.items__pagesize {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.items__pagination {
+  display: flex;
+  justify-content: end;
+  gap: 8px;
+  flex: 1;
+  align-items: center;
+}
+
+.items__pagination button {
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+}
+
+.items__pagination button:disabled {
+  background: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.items__error {
+  color: red;
+  text-align: center;
+  margin-top: 32px;
+}
